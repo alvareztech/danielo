@@ -1,6 +1,6 @@
 import { getPostBySlug, getPostSlugs } from "@/lib/markdown";
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const slugs = getPostSlugs();
   return slugs.map((slug) => ({ slug: slug.replace(/\.md$/, "") }));
 }

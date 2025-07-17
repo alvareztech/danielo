@@ -5,11 +5,13 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({ slug: slug.replace(/\.md$/, "") }));
 }
 
-export default async function BlogPostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+type Props = {
+  params: {
+    slug: string;
+  };
+};
+
+export default async function BlogPostPage({ params }: Props) {
   const post = await getPostBySlug(params.slug);
 
   return (

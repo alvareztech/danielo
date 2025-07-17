@@ -11,6 +11,7 @@ type Props = {
   };
 };
 
+// @ts-expect-error – workaround tipo incorrecto por bug de Next
 export default async function BlogPostPage({ params }: Props) {
   const post = await getPostBySlug(params.slug);
 

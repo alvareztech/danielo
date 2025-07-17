@@ -1,0 +1,66 @@
+---
+title: Binary Search
+summary: A search algorithm that finds the position of a target value within a sorted array.
+tags: [algorithm, swift, kotlin, java]
+---
+
+_O(log n)_
+
+## Preconditions
+
+- Array should be sorted
+
+## Swift
+
+```swift
+func binarySearch(numbers: [Int], target: Int) -> Int {
+    var left = 0
+    var right = numbers.count
+
+    while left < right {
+        let middle = (left + right) / 2
+        if numbers[middle] < target {
+            left = middle + 1
+        } else {
+            right = middle
+        }
+    }
+    return left
+}
+```
+
+## Kotlin
+
+```kotlin
+fun binarySearch(numbers: Array<Int>, target: Int): Int {
+    var left = 0
+    var right = numbers.size
+
+    while (left < right) {
+        val middle = (left + right) / 2
+        if (numbers[middle] < target) {
+            left = middle + 1
+        } else {
+            right = middle
+        }
+    }
+    return left
+}
+```
+
+## Java
+
+```java
+static int binarySearch(int[] numbers, int target) {
+    int left = 0;
+    int right = numbers.length;
+    while (left < right) {
+        int middle = (left + right) / 2;
+        if (numbers[middle] < target)
+            left = middle + 1;
+        else
+            right = middle;
+    }
+    return left;
+}
+```

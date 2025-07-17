@@ -14,7 +14,7 @@ export default async function BlogPostPage({
 
   return (
     <article>
-      <h1>{post.frontmatter.title}</h1>
+      <h1 className="text-2xl font-bold">{post.frontmatter.title}</h1>
       <p>{post.frontmatter.date}</p>
       <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
     </article>

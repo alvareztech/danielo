@@ -5,12 +5,13 @@ export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
   return slugs.map((slug) => ({ slug: slug.replace(/\.md$/, "") }));
 }
 
-// 🚨 Next.js en producción puede inferir mal los tipos, así que usamos esta solución robusta
-export default async function BlogPostPage(
-  props: Awaited<ReturnType<typeof getStaticProps>>,
-) {
-  const { params } = props;
-  const post = await getPostBySlug(params.slug);
+type BlogPostPageProps = {
+  params: Promise<{ slug: string }> | { slug: string };
+};
+
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const resolvedParams = await params;
+  const post = await getPostBySlug(resolvedParams.slug);
 
   return (
     <article className="prose prose-lg max-w-3xl mx-auto px-4 py-12">
@@ -19,13 +20,4 @@ export default async function BlogPostPage(
       <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
     </article>
   );
-}
-
-// ✅ Esta función define los props para el componente — evita el error del tipo Promise
-async function getStaticProps() {
-  return {
-    params: {
-      slug: "", // placeholder (Next lo reemplaza)
-    },
-  };
 }

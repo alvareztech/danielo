@@ -11,6 +11,10 @@ export function getPostSlugs() {
 }
 
 export async function getPostBySlug(slug: string) {
+  if (!slug) {
+    throw new Error("getPostBySlug received an empty slug");
+  }
+
   const realSlug = slug.replace(/\.md$/, "");
   const fullPath = path.join(postsDirectory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
